@@ -1,4 +1,4 @@
-/* 
+/*
 
   write a function that accepts an array that only contains
   two types of things: numbers and arrays. those nested arrays
@@ -11,9 +11,19 @@
 
 function nestedAdd(array) {
   // write code here
+  let sum = 0;
+  for (let i = 0; i < array.length; i++) {
+    const current = array[i];
+    if (Array.isArray(current)) {
+      sum += nestedAdd(current);
+    } else {
+      sum += current;
+    }
+  }
+  return sum;
 }
 
-test.skip("nested arrays addition", () => {
+test("nested arrays addition", () => {
   expect(nestedAdd([1, 2, 3])).toEqual(6);
   expect(nestedAdd([1, [2], 3])).toEqual(6);
   expect(nestedAdd([[[[[[[[[5]]]]]]]]])).toEqual(5);
